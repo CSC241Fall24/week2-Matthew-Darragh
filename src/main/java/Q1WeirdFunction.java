@@ -3,29 +3,33 @@
 public class Q1WeirdFunction {
 
     public static int fRecursive(int n) {
-        // TODO: Implement the recursive function
-        if(n < 3)
-        {
+        if (n < 0) {
+            throw new IllegalArgumentException("Input must be non-negative");
+        }
+        if (n < 3) {
             return n;
         }
         return fRecursive(n - 1) + 2 * fRecursive(n - 2) + 3 * fRecursive(n - 3);
     }
 
     public static int fIterative(int n) {
-        // TODO: Implement the iterative function
+        if (n < 0) {
+            throw new IllegalArgumentException("Input must be non-negative");
+        }
         if (n < 3) {
             return n;
         }
         
-        int[] f = new int[n + 1];
-        f[0] = 0;
-        f[1] = 1;
-        f[2] = 2;
+        int f0 = 0, f1 = 1, f2 = 2;
+        int result = 0;
         
         for (int i = 3; i <= n; i++) {
-            f[i] = f[i - 1] + 2 * f[i - 2] + 3 * f[i - 3];
+            result = f2 + 2 * f1 + 3 * f0;
+            f0 = f1;
+            f1 = f2;
+            f2 = result;
         }
         
-        return f[n];
+        return result;
     }
 }
